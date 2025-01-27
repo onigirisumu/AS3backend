@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="/css/bmi.css">
+    <title>BMI Results</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">Nutrient</a></li>
+                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">History</a></li>
+                    <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
+                    <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
+                    <% } else { %>
+                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1 class="mt-5 text-center">BMI Results</h1>
+        <div class="results bg-light p-4 rounded shadow-sm">
+            <h2 class="text-center text-success">Your BMI: <%= bmi %></h2>
+            <p class="text-center">You are classified as: <strong><%= category %></strong></p>
+            <% if (age < 18) { %>
+                <p class="text-center">As you're under 18, it's important to monitor your growth and health.</p>
+            <% } %>
+            <% if (gender === 'male') { %>
+                <p class="text-center">As a male, muscle mass might affect your BMI.</p>
+            <% } else if (gender === 'female') { %>
+                <p class="text-center">As a female, hormonal changes can affect your BMI.</p>
+            <% } %>
+            <div class="text-center">
+                <a href="/bmicalculator" class="btn btn-pink mt-3">Go Back</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

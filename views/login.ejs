@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="/css/login.css">
+        <title>Home - My Cosmetic Brand</title>
+    </head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">Nutrient</a></li>
+                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">History</a></li>
+                    <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
+                    <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
+                    <% } else { %>
+                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <input type="text" name="username" class="form-control mb-3" placeholder="Username" required autofocus>
+            <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
+            <button type="submit" class="btn btn-custom btn-block">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+
+    </main>
+    <footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <p style="text-align: center;">&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
+    </footer>
+</body>
+</html>

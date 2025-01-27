@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background: hwb(0 100% 0%);
+    padding-top: 70px;
+}
+
+header {
+    margin-bottom: 40px;
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 1.2rem;
+    color: #333;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+h1 a {
+    font-size: 2rem;
+    color: black;
+    font-weight: bold;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #E9967A;
+}
+
+p {
+    font-size: 0.95em;
+    color: #666;
+}
+
+button#editButton, button[type="submit"] {
+    background-color: #FFB6C1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button#editButton:hover, button[type="submit"]:hover {
+    background-color: #FF69B4;
+}
+
+#editForm {
+    margin-top: 20px;
+}
+
+#editForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#editForm input[type="text"],
+#editForm input[type="email"],
+#editForm input[type="number"],
+#editForm input[type="password"],
+#editForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+footer {
+    background-color: #474747;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #ffffff;
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffebee;
+}

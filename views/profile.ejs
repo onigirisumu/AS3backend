@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="/css/profile.css">
+        <title>Home - My Cosmetic Brand</title>
+    </head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">Nutrient</a></li>
+                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">History</a></li>
+                    <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
+                    <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
+                    <% } else { %>
+                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
+                    <% } %>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Welcome to your profile, <%= user.firstName %>!</h1>
+            <p><strong>First Name:</strong> <%= user.firstName %></p>
+            <p><strong>Last Name:</strong> <%= user.lastName %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Gender:</strong> <%= user.gender %></p>
+            <p><strong>Age:</strong> <%= user.age %></p>
+            <p><strong>Account Created:</strong> <%= user.createdAt %></p>
+            <p><strong>Last Updated:</strong> <%= user.updatedAt %></p>
+            <p><strong>Account Deleted:</strong> <%= user.deletedAt %></p>
+            
+            <button id="editButton">Edit Profile</button>
+    
+            <div id="editForm" style="display: none;">
+                <h2>Edit Profile</h2>
+                <form action="/updateProfile" method="POST" onsubmit="updateProfile()">
+                    <label for="username">User Name</label>
+                    <input type="text" id="username" name="username" value="<%= user.username %>">
+                    
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>">
+                    
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>">
+                    
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>">
+                    
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender">
+                        <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
+                        <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
+                        <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
+                    </select>
+                    
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" value="<%= user.age %>">
+                    
+                    <h3>Change Password</h3>
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" id="oldPassword" name="oldPassword">
+                    
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword">
+                    
+                    <button type="submit">Update Profile</button>
+                </form>
+            </div>
+    
+            <form action="/logout" method="POST" style="margin-top: 20px;">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="/js/profile.js"></script>
+        <p style="text-align: center;">&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
+    </footer>
+</body>
+</html>

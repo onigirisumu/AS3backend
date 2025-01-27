@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-width: 100vh;
+}
+
+header {
+    min-height: 30px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 1.2rem;
+    color: #333;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+h1 a {
+    font-size: 2rem;
+    color: black;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 20px;
+}
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+form label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+form input, form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+form input:focus, form select:focus {
+    border-color: #6f0d56;
+    outline: none;
+    box-shadow: 0 0 5px rgba(160, 5, 103, 0.5);
+}
+form button {
+    grid-column: span 2;
+    padding: 12px;
+    font-size: 1.2rem;
+    background-color: #da5296;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+form button:hover {
+    background-color: #a81c64;
+}
+.result {
+    background: #e6f4ff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    color: #333;
+}
+.result h2 {
+    font-size: 1.5rem;
+    color: #961d61;
+    margin-bottom: 10px;
+}
+.result p {
+    margin-bottom: 10px;
+}

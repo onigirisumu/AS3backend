@@ -1,0 +1,109 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 60px; 
+}
+
+header {
+    min-height: 30px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 1.2rem;
+    color: #333;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+
+.container {
+    margin-top: 80px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #e91e63;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    background-color: #e91e63;
+    border-color: #e91e63;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.btn-secondary:hover {
+    background-color: #c2185b;
+    border-color: #c2185b;
+}
+
+/* Search History List */
+ul.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.list-group-item strong {
+    color: #e91e63;
+}
+
+.list-group-item ul {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+.list-group-item ul li {
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.list-group-item ul li:hover {
+    background-color: #f9f9f9;
+}
+
+p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
