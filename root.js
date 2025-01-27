@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 
 require('dotenv').config();
