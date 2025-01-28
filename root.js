@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
 require('dotenv').config();
@@ -52,6 +52,21 @@ next();
 });
 
 const User = mongoose.model('User', userSchema);
+
+const makeupDataSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    makeupId: String,
+    name: String,
+    price: String,
+    image: String,
+    description: String,
+    productType: String,
+    productLink: String,
+    timestamp: { type: Date, default: Date.now }
+});
+
+const MakeupData = mongoose.model('MakeupData', makeupDataSchema);
+
 
 async function createAdmin() {
     const adminUsernames = process.env.ADMIN_USERS.split(',');
@@ -227,6 +242,88 @@ app.get('/login', (req, res) => {
     res.render('login', { page: 'login', user });
 });
 
+app.get('/makeup', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login');
+    }
+
+    try {
+        const response = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json', {
+            params: { brand: 'nyx' }
+        });
+
+        if (!response.data || response.data.length === 0) {
+            return res.status(404).send('No makeup products found.');
+        }
+
+        const makeupData = response.data.filter(product => product.image_link && product.image_link.trim() !== "");
+        const userId = req.session.userId;
+
+        const savePromises = makeupData.map(async product => {
+            const exists = await MakeupData.findOne({ userId, makeupId: product.id });
+            if (!exists) {
+                const newProduct = new MakeupData({
+                    userId,
+                    makeupId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image_link,
+                    description: product.description,
+                    productType: product.product_type,
+                    productLink: product.product_link,
+                });
+                return newProduct.save();
+            }
+        });
+
+        await Promise.all(savePromises);
+
+        res.render('makeup', {
+            makeupData,
+            user: req.user,
+            page: 'makeup'
+        });
+    } catch (error) {
+        console.error('Error fetching makeup data:', error);
+        res.status(500).send('Error fetching makeup products.');
+    }
+});
+
+
+app.get('/makeup/search', async (req, res) => {
+    const searchQuery = req.query.query; 
+    if (!searchQuery) {
+        return res.status(400).send('Query parameter is required');
+    }
+
+    try {
+        const makeupResponse = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json', {
+            params: { brand: 'nyx' }, 
+        });
+
+        const makeupData = makeupResponse.data;
+
+        if (makeupData && makeupData.length > 0) {
+            const filteredProducts = makeupData.filter(product =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                product.image_link && 
+                product.image_link.trim() !== ""
+            );
+
+            if (filteredProducts.length > 0) {
+                return res.json({ makeupData: filteredProducts });
+            } else {
+                return res.status(404).send('No NYX products found matching your search.');
+            }
+        } else {
+            return res.status(404).send('No NYX products available at the moment.');
+        }
+    } catch (error) {
+        console.error('Error fetching makeup data:', error);
+        res.status(500).send('Error fetching makeup products. Please try again later.');
+    }
+});
+
 app.get('/signup', (req, res) => {
     const user = req.session.user || null;
     res.render('signup', { user, page: 'signup' });
@@ -247,7 +344,7 @@ app.post('/signup', async (req, res) => {
         firstName,
         lastName,
         username,
-        email, // <-- ensure this is included
+        email, 
         gender,
         age,
         password: hashedPassword,
@@ -304,7 +401,7 @@ app.post('/updateProfile', async (req, res) => {
     user.username = username;
     user.firstName = firstName;
     user.lastName = lastName;
-    user.email = email; // <-- ensure this is included
+    user.email = email; 
     user.gender = gender;
     user.age = age;
 
@@ -385,7 +482,6 @@ app.get('/history', async (req, res) => {
     }
 });
 
-
 app.use('/bmicalculator', bmiRoutes);
 
 app.get('/login', (req, res) => {
@@ -445,34 +541,6 @@ app.get('/api/locations', (req, res) => {
 // Map route
 app.get('/map', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
-});
-
-// Makeup data API route
-app.get('/makeup/data', async (req, res) => {
-    try {
-        const makeupResponse = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json', {
-            params: {
-                brand: 'maybelline'
-            }
-        });
-
-        const makeupData = makeupResponse.data.slice(0, 8);
-        const responseData = makeupData.map(product => ({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image_link,
-            description: product.description,
-            productType: product.product_type,
-            productLink: product.product_link
-        }));
-
-        console.log("Makeup data:", JSON.stringify(responseData, null, 2));
-        res.json(responseData);
-    } catch (error) {
-        console.error("Error fetching makeup data:", error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'Error fetching makeup data' });
-    }
 });
 
 const History = require('./public/js/history');
