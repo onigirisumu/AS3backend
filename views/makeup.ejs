@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup Search</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/makeup.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
+                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
+                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
+                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">History</a></li>
+                    <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
+                    <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
+                    <% } else { %>
+                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="search-section">
+            <form id="makeup-search-form">
+                <label for="makeup-name">Enter the makeup product name:</label>
+                <input type="text" id="makeup-name" name="makeup-name" placeholder="e.g., Lipstick" required>
+                <button type="button" onclick="searchMakeup()">Search</button>
+            </form>
+        </section>
+
+        <section id="makeup-results" class="result-section">
+            <h2>Search Results</h2>
+            <div id="makeup-output">
+                <% if (typeof makeupData !== 'undefined' && makeupData.length > 0) { %>
+                    <% makeupData.forEach(function(product) { %>
+                        <div class="product-item">
+                            <h3><%= product.name %></h3>
+                            <img src="<%= product.image_link || 'default_image.jpg' %>" alt="<%= product.name %>" class="product-image">
+                            <p><%= product.description %></p>
+                            <p><strong>Price:</strong> <%= product.price %> <%= product.price_sign %></p>
+                            <a href="<%= product.product_link %>" target="_blank" class="more-info-link">More Info</a>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>No products found for your search.</p>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/makeup.js"></script>
+</body>
+</html>
