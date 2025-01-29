@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mhistory.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
+                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
+                    <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
+                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
+                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
+                    <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
+                    <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
+                    <% } else { %>
+                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5 pt-5">
+        <h1>Makeup Search History</h1>
+        <ul class="list-unstyled">
+            <% history.forEach(entry => { %>
+                <li class="mb-4">
+                    <strong>Search Date:</strong> <%= entry.createdAt %> <br>
+                    <strong>Results:</strong>
+                    <ul class="search-results">
+                        <% if (entry.results && entry.results.length > 0) { %>
+                            <% entry.results.forEach(result => { %>
+                                <li class="result-item mb-2">
+                                    <strong><%= result.product_name %></strong> <br>
+                                    <img src="<%= result.image_url %>" alt="<%= result.product_name %>" width="100" height="100"> <br>
+                                </li>
+                            <% }) %>
+                        <% } else { %>
+                            <li>No results found.</li>
+                        <% } %>
+                    </ul>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</body>
+</html>
