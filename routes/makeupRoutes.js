@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const MakeupHistory = require('../models/MakeupHistory');
+const MakeupHistory = require('../MakeupHistory');
 
 router.post('/makeup/saveHistory', async (req, res) => {
     try {
