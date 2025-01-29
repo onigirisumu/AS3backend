@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const bmiRoutes = require('./routes/bmiRoutes');
+const makeupRoutes = require('./routes/makeupRoutes');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const chalk = require('chalk');
@@ -19,13 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({ secret: 'yourSecretKey', resave: false, saveUninitialized: false }));
 
-
 const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri)
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
+app.use('/makeup', makeupRoutes);
 
 const userSchema = new mongoose.Schema({
     userId: {
@@ -66,7 +67,6 @@ const makeupDataSchema = new mongoose.Schema({
 });
 
 const MakeupData = mongoose.model('MakeupData', makeupDataSchema);
-
 
 async function createAdmin() {
     const adminUsernames = process.env.ADMIN_USERS.split(',');
@@ -242,6 +242,7 @@ app.get('/login', (req, res) => {
     res.render('login', { page: 'login', user });
 });
 
+
 app.get('/makeup', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login');
@@ -289,7 +290,6 @@ app.get('/makeup', async (req, res) => {
     }
 });
 
-
 app.get('/makeup/search', async (req, res) => {
     const searchQuery = req.query.query; 
     if (!searchQuery) {
@@ -324,11 +324,67 @@ app.get('/makeup/search', async (req, res) => {
     }
 });
 
-app.get('/signup', (req, res) => {
-    const user = req.session.user || null;
-    res.render('signup', { user, page: 'signup' });
+
+app.post('/makeup/saveHistory', async (req, res) => {
+    console.log('Saving history:', req.body); 
+
+    if (!req.session.userId) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+        const { query, results } = req.body;
+
+        if (!results || results.length === 0) {
+            return res.status(400).json({ error: 'No results to save' });
+        }
+
+        const savePromises = results.map(async (product) => {
+            return new MakeupData({
+                userId: req.session.userId,
+                searchQuery: query,
+                makeupId: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image_link,
+                description: product.description || "No description available.",
+                productType: product.product_type,
+                productLink: product.product_link,
+                timestamp: new Date()
+            }).save();
+        });
+
+        await Promise.all(savePromises);
+        res.status(201).json({ message: 'Search history saved successfully' });
+
+    } catch (error) {
+        console.error('Error saving makeup search history:', error);
+        res.status(500).json({ error: 'Error saving search history' });
+    }
 });
 
+
+
+app.get('/makeupHistory', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login');
+    }
+
+    try {
+        const history = await MakeupData.find({ userId: req.session.userId }).sort({ timestamp: -1 });
+
+        console.log('Makeup History:', history);
+
+        res.render('makeupHistory', {
+            history,
+            user: req.user,
+            page: 'makeupHistory',
+        });
+    } catch (err) {
+        console.error('Error fetching makeup history:', err);
+        res.status(500).send('Error fetching makeup history');
+    }
+});
 
 // Sign Up Route
 app.post('/signup', async (req, res) => {
