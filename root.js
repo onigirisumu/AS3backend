@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     },
     firstName: String,
     lastName: String,
-    username: String,
+    username: { type: String, unique: true, sparse: true },
     email: { type: String, unique: false },
     gender: String,
     age: Number,
@@ -53,6 +53,15 @@ next();
 });
 
 const User = mongoose.model('User', userSchema);
+
+const productSchema = new mongoose.Schema({
+    title: String,
+    category: String,
+    description: String,
+    images: [String],
+});
+
+const Product = mongoose.model('Product', productSchema);
 
 const makeupDataSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -130,15 +139,15 @@ try {
 
 app.use(async (req, res, next) => {
     if (req.session.userId) {
-    try {
-        const user = await User.findById(req.session.userId);
-        if (user) {
-        req.user = user;
-        res.locals.user = user;
+        try {
+            const user = await User.findById(req.session.userId);
+            if (user) {
+                req.user = user;
+                res.locals.user = user;
+            }
+        } catch (err) {
+            console.error('Error when receiving the user:', err);
         }
-    } catch (err) {
-        console.error('Error retrieving user:', err);
-    }
     }
     next();
 });
@@ -151,6 +160,97 @@ function isAdmin(req, res, next) {
     } else {
         res.status(403).send('Access denied');
     }
+}
+
+
+app.get('/', async (req, res) => {
+    const user = req.user || null;
+    const products = await getProducts();
+    res.render('home', { user, products, page: 'home' });
+});
+
+app.post('/add-product', isAdmin, async (req, res) => {
+    const { title, category, description } = req.body;
+    let { images } = req.body;
+
+    images = images.split(',').map(url => url.trim()).slice(0, 3);
+
+    try {
+        const newProduct = new Product({ title, category, description, images });
+        await newProduct.save();
+        res.redirect('/');
+    } catch (err) {
+        console.error('Product adding error:', err);
+        res.status(500).send('Server error');
+    }
+});
+
+app.post('/update/:id', isAdmin, async (req, res) => {
+    const { id } = req.params;
+    const { title, category, description } = req.body;
+    let { images } = req.body;
+
+    console.log('req.body:', req.body);
+
+    if (images) {
+        images = images.split(',').map(url => url.trim()).slice(0, 3);
+    } else {
+        images = [];
+    }
+
+    try {
+        const product = await Product.findById(id);
+
+        if (!product) {
+            return res.status(404).send('Product');
+        }
+
+        if (title) product.title = title;
+        if (category) product.category = category;
+        if (description) product.description = description;
+        if (images.length > 0) product.images = images;
+
+        await product.save();
+        console.log('The product is updated:', product);
+        res.redirect('/');
+    } catch (err) {
+        console.error('Product update error:', err);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
+app.post('/update-empty-block/:id', isAdmin, async (req, res) => {
+    const { title, category, description } = req.body;
+    let { images } = req.body;
+
+    images = images ? images.split(',').map(url => url.trim()).slice(0, 3) : [];
+
+    try {
+        const newProduct = new Product({ title, category, description, images });
+        await newProduct.save();
+        res.redirect('/');
+    } catch (err) {
+        console.error('Error in creating a new product:', err);
+        res.status(500).send('Server error');
+    }
+});
+
+app.post('/clear-product/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await Product.findByIdAndDelete(id);
+        res.redirect('/');
+    } catch (err) {
+        console.error('Error deleting product:', err);
+        res.status(500).send('Server error');
+    }
+});
+
+async function getProducts() {
+    return await Product.find();
 }
 
 app.get('/admin', isAdmin, async (req, res) => {
@@ -501,12 +601,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', async (req, res) => {
-    const user = req.session.userId ? await User.findById(req.session.userId) : null;
-    res.render('home', { user, page: 'home' });
-});
-
 
 app.get('/bmiCalculator', async (req, res) => {
     const user = req.session.userId ? await User.findById(req.session.userId) : null;
