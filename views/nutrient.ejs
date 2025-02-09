@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/nutrient.css">
 </head>
 <body>
-    <header>
+   <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,13 +19,17 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
                     <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
-                    <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
-                    <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
-                    <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
-                    <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
                     <% if (user && user.isAdmin) { %>
+                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
+                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
+                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
+                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
                         <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
                     <% } else if (user) { %>
+                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
+                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
+                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
+                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
                         <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
                     <% } else { %>
                         <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
