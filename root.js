@@ -486,6 +486,11 @@ app.get('/makeupHistory', async (req, res) => {
     }
 });
 
+app.get('/signup', (req, res) => {
+    const user = req.session.user || null;
+    res.render('signup', { user, page: 'signup' });
+});
+
 // Sign Up Route
 app.post('/signup', async (req, res) => {
     const { firstName, lastName, username, email, gender, age, password, confirmPassword } = req.body;
