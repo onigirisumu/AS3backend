@@ -1,81 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search History</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="/css/history.css"> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= __('history.title') %> - <%= __('brand') %></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/history.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .flex-grow-1 {
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
-                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
-                    <% if (user && user.isAdmin) { %>
-                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
-                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
-                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
-                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
-                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
-                    <% } else if (user) { %>
-                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
-                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
-                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
-                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
-                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
-                    <% } else { %>
-                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container mt-5">
-        <h1 class="mb-4">Search History</h1>
-        <a href="/" class="btn btn-secondary mb-3">Back to Home</a>
+  <div class="page-wrapper">
 
-        <% if (history.length > 0) { %>
-            <ul class="list-group">
-                <% history.forEach(entry => { %>
-                    <li class="list-group-item">
-                        <strong>Query:</strong> <%= entry.query %> <br>
-                        <strong>Date:</strong> <%= new Date(entry.createdAt).toLocaleString() %> <br>
-                        <strong>Results:</strong>
-                        <ul class="search-results">
-                            <% entry.results.forEach(result => { %>
-                                <li class="result-item">
-                                    <strong><%= result.name %></strong> <br>
-                                    <div class="nutritional-info">
-                                        <strong>Calories:</strong> <%= result.nutrients.find(n => n.name === "Energy")?.value || "N/A" %> kcal <br>
-                                        <strong>Protein:</strong> <%= result.nutrients.find(n => n.name === "Protein")?.value || "N/A" %> g <br>
-                                        <strong>Carbohydrates:</strong> <%= result.nutrients.find(n => n.name === "Carbohydrate, by difference")?.value || "N/A" %> g <br>
-                                        <strong>Fat:</strong> <%= result.nutrients.find(n => n.name === "Total lipid (fat)")?.value || "N/A" %> g <br>
-                                    </div>
-                                </li>
-                            <% }) %>
-                        </ul>
-                    </li>
-                <% }) %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+          <h1 class="navbar-brand">
+            <a href="/"><%= __('brand') %></a>
+          </h1>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="<%= __('toggle_navigation') %>">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item <%= page === 'home' ? 'active' : '' %>">
+                <a class="nav-link" href="/"><%= __('nav.home') %></a>
+              </li>
+              <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>">
+                <a class="nav-link" href="/bmiCalculator"><%= __('nav.bmi') %></a>
+              </li>
+              <% if (user && user.isAdmin) { %>
+                <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>">
+                  <a class="nav-link" href="/makeup"><%= __('nav.makeup') %></a>
+                </li>
+                <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>">
+                  <a class="nav-link" href="/makeupHistory"><%= __('nav.makeup_history') %></a>
+                </li>
+                <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>">
+                  <a class="nav-link" href="/nutrient"><%= __('nav.nutrient') %></a>
+                </li>
+                <li class="nav-item <%= page === 'history' ? 'active' : '' %>">
+                  <a class="nav-link" href="/history"><%= __('nav.history') %></a>
+                </li>
+                <li class="nav-item <%= page === 'admin' ? 'active' : '' %>">
+                  <a class="nav-link" href="/admin"><%= __('nav.admin') %></a>
+                </li>
+              <% } else if (user) { %>
+                <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>">
+                  <a class="nav-link" href="/makeup"><%= __('nav.makeup') %></a>
+                </li>
+                <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>">
+                  <a class="nav-link" href="/makeupHistory"><%= __('nav.makeup_history') %></a>
+                </li>
+                <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>">
+                  <a class="nav-link" href="/nutrient"><%= __('nav.nutrient') %></a>
+                </li>
+                <li class="nav-item <%= page === 'history' ? 'active' : '' %>">
+                  <a class="nav-link" href="/history"><%= __('nav.history') %></a>
+                </li>
+                <li class="nav-item <%= page === 'profile' ? 'active' : '' %>">
+                  <a class="nav-link" href="/profile"><%= __('nav.profile') %></a>
+                </li>
+              <% } else { %>
+                <li class="nav-item <%= page === 'login' ? 'active' : '' %>">
+                  <a class="nav-link" href="/login"><%= __('nav.login') %></a>
+                </li>
+              <% } %>
             </ul>
-        <% } else { %>
-            <p>No search history found.</p>
-        <% } %>
-    </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+ 
+    <main class="container flex-grow-1" style="margin-top: 120px;">
+      <h1 class="mb-4"><%= __('history.title') %></h1>
+      <a href="/" class="btn btn-secondary mb-3"><%= __('history.back_home') %></a>
+      <% if (history.length > 0) { %>
+        <ul class="list-group">
+          <% history.forEach(entry => { %>
+            <li class="list-group-item">
+              <strong><%= __('history.query_label') %>:</strong> <%= entry.query %><br>
+              <strong><%= __('history.date_label') %>:</strong> <%= new Date(entry.createdAt).toLocaleString() %><br>
+              <strong><%= __('history.results_label') %>:</strong>
+              <ul class="search-results">
+                <% entry.results.forEach(result => { %>
+                  <li class="result-item">
+                    <strong><%= result.name %></strong><br>
+                    <div class="nutritional-info">
+                      <strong><%= __('history.calories_label') %>:</strong> <%= result.nutrients.find(n => n.name === "Energy")?.value || "N/A" %> kcal<br>
+                      <strong><%= __('history.protein_label') %>:</strong> <%= result.nutrients.find(n => n.name === "Protein")?.value || "N/A" %> g<br>
+                      <strong><%= __('history.carbs_label') %>:</strong> <%= result.nutrients.find(n => n.name === "Carbohydrate, by difference")?.value || "N/A" %> g<br>
+                      <strong><%= __('history.fat_label') %>:</strong> <%= result.nutrients.find(n => n.name === "Total lipid (fat)")?.value || "N/A" %> g<br>
+                    </div>
+                  </li>
+                <% }) %>
+              </ul>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p><%= __('history.no_history') %></p>
+      <% } %>
+    </main>
+
+    <div class="container mt-5 pt-5">
+        <div class="row">
+          <div class="col text-right">
+            <a href="/lang/en" class="btn btn-sm btn-outline-primary">English</a>
+            <a href="/lang/fr" class="btn btn-sm btn-outline-primary">Français</a>
+            <a href="/lang/ru" class="btn btn-sm btn-outline-primary">Русский</a>
+            <a href="/lang/es" class="btn btn-sm btn-outline-primary">Espanol</a>
+          </div>
+        </div>
+      </div>
+  
+
+    <footer class="container text-center mt-5">
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script src="/js/history.js"></script>
+      <p>&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
+    </footer>
+  </div>
 </body>
-<footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="/js/history.js"></script>
-    <p style="text-align: center;">&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
-</footer>
 </html>

@@ -1,59 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <link rel="stylesheet" href="/css/login.css">
-        <title>Home - My Cosmetic Brand</title>
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/login.css">
+  <title><%= __('title') %></title>
+</head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <h1 class="navbar-brand"><a href="/">Health&Care</a></h1>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
-                    <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
-                    <% if (user && user.isAdmin) { %>
-                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
-                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
-                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
-                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
-                        <li class="nav-item <%= page === 'admin' ? 'active' : '' %>"><a class="nav-link" href="/admin">Admin</a></li>
-                    <% } else if (user) { %>
-                        <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
-                        <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
-                        <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>"><a class="nav-link" href="/nutrient">NUTRIENT</a></li>
-                        <li class="nav-item <%= page === 'history' ? 'active' : '' %>"><a class="nav-link" href="/history">HISTORY</a></li>
-                        <li class="nav-item <%= page === 'profile' ? 'active' : '' %>"><a class="nav-link" href="/profile">Profile</a></li>
-                    <% } else { %>
-                        <li class="nav-item <%= page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Log in</a></li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-            <input type="text" name="username" class="form-control mb-3" placeholder="Username" required autofocus>
-            <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
-            <button type="submit" class="btn btn-custom btn-block">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <h1 class="navbar-brand">
+          <a href="/"><%= __('brand') %></a>
+        </h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="<%= __('toggle_navigation') %>">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Main Navigation Items -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item <%= page === 'home' ? 'active' : '' %>">
+              <a class="nav-link" href="/"><%= __('nav.home') %></a>
+            </li>
+            <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>">
+              <a class="nav-link" href="/bmiCalculator"><%= __('nav.bmi') %></a>
+            </li>
+            <% if (user && user.isAdmin) { %>
+              <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>">
+                <a class="nav-link" href="/makeup"><%= __('nav.makeup') %></a>
+              </li>
+              <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>">
+                <a class="nav-link" href="/makeupHistory"><%= __('nav.makeup_history') %></a>
+              </li>
+              <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>">
+                <a class="nav-link" href="/nutrient"><%= __('nav.nutrient') %></a>
+              </li>
+              <li class="nav-item <%= page === 'history' ? 'active' : '' %>">
+                <a class="nav-link" href="/history"><%= __('nav.history') %></a>
+              </li>
+              <li class="nav-item <%= page === 'admin' ? 'active' : '' %>">
+                <a class="nav-link" href="/admin"><%= __('nav.admin') %></a>
+              </li>
+            <% } else if (user) { %>
+              <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>">
+                <a class="nav-link" href="/makeup"><%= __('nav.makeup') %></a>
+              </li>
+              <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>">
+                <a class="nav-link" href="/makeupHistory"><%= __('nav.makeup_history') %></a>
+              </li>
+              <li class="nav-item <%= page === 'nutrient' ? 'active' : '' %>">
+                <a class="nav-link" href="/nutrient"><%= __('nav.nutrient') %></a>
+              </li>
+              <li class="nav-item <%= page === 'history' ? 'active' : '' %>">
+                <a class="nav-link" href="/history"><%= __('nav.history') %></a>
+              </li>
+              <li class="nav-item <%= page === 'profile' ? 'active' : '' %>">
+                <a class="nav-link" href="/profile"><%= __('nav.profile') %></a>
+              </li>
+            <% } else { %>
+              <li class="nav-item <%= page === 'login' ? 'active' : '' %>">
+                <a class="nav-link" href="/login"><%= __('nav.login') %></a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-    </main>
-    <footer>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <p style="text-align: center;">&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
-    </footer>
+ 
+
+  <main class="container" style="margin-top: 120px;">
+    <h2><%= __('login.title') %></h2>
+    <form action="/login" method="POST">
+      <input type="text" name="username" class="form-control mb-3" placeholder="<%= __('login.username_placeholder') %>" required autofocus>
+      <input type="password" name="password" class="form-control mb-3" placeholder="<%= __('login.password_placeholder') %>" required>
+      <button type="submit" class="btn btn-custom btn-block"><%= __('login.submit_button') %></button>
+    </form>
+    <p><%= __('login.no_account') %> <a href="/signup"><%= __('login.signup_link') %></a></p>
+  </main>
+
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col text-right">
+        <a href="/lang/en" class="btn btn-sm btn-outline-primary">English</a>
+        <a href="/lang/fr" class="btn btn-sm btn-outline-primary">Français</a>
+        <a href="/lang/ru" class="btn btn-sm btn-outline-primary">Русский</a>
+        <a href="/lang/es" class="btn btn-sm btn-outline-primary">Espanol</a>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <p>&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
+  </footer>
 </body>
 </html>

@@ -28,7 +28,7 @@ async function setupMap() {
 
 async function getWeather() {
     try {
-        const response = await fetch('http://localhost:3000/weather/data');
+        const response = await fetch('/weather/data');
         const data = await response.json();
         console.log('Weather data:', data);
         document.getElementById('temperature').textContent = `${data.temperature} °C`;

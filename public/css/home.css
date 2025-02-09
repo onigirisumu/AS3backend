@@ -28,6 +28,12 @@ body {
     flex-direction: column;
     min-width: 100vh;
 }
+.language-switcher {
+    position: relative; /* or static if that works */
+    z-index: 1050; /* adjust as needed, but typically the navbar might be around 1030-1050 */
+    margin-top: 100px;
+  }
+  
 
 header {
     min-height: 30px;

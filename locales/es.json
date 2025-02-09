@@ -1,0 +1,178 @@
+{
+    "title": "Inicio - Mi Marca Cosmética",
+    "brand": "Salud&Cuidado",
+    "toggle_navigation": "Alternar navegación",
+    "nav": {
+      "home": "INICIO",
+      "bmi": "IMC",
+      "makeup": "Maquillaje",
+      "makeup_history": "Historial de Maquillaje",
+      "nutrient": "Nutrición",
+      "history": "Historial",
+      "admin": "Administrador",
+      "profile": "Perfil",
+      "login": "Iniciar sesión"
+    },
+    "carousel": {
+      "alt1": "Imagen del carrusel 1",
+      "alt2": "Imagen del carrusel 2",
+      "alt3": "Imagen del carrusel 3",
+      "slide1_title": "Descubre nuevos horizontes de belleza",
+      "slide1_text": "Prueba nuestros productos exclusivos en cosmética. Fórmulas únicas para la salud y el brillo de tu piel.",
+      "slide2_title": "Aprende de los profesionales",
+      "slide2_text": "Mira nuestros tutoriales sobre maquillaje y cuidado de la piel. Instrucciones paso a paso de cosmetólogos destacados.",
+      "slide3_title": "Descuentos y promociones en tus productos favoritos",
+      "slide3_text": "No pierdas la oportunidad de comprar la mejor cosmética a precios especiales. La belleza debe ser accesible para todos.",
+      "previous": "Anterior",
+      "next": "Siguiente"
+    },
+    "welcome": {
+      "title": "Bienvenido a Health&Cuidado",
+      "subtitle": "Bienvenido a Health&Cuidado — tu aliado para promover un estilo de vida saludable y una piel radiante.",
+      "description": "En Health&Cuidado creemos que la salud y la belleza van de la mano. Estamos aquí para guiarte en un viaje hacia el bienestar óptimo, centrándonos en el cuidado de la piel que la nutre y rejuvenece desde adentro. Nuestra misión es ofrecer más que productos: brindamos soluciones integrales para mejorar tu salud, apariencia y bienestar general.",
+      "footer_text": "En Health&Cuidado nos dedicamos a empoderarte con el conocimiento y las herramientas para cuidar tu piel y tu salud en general. Creemos que todos merecen lucir y sentirse lo mejor posible, cada día."
+    },
+    "weather": {
+      "title": "Clima actual en Astaná",
+      "temperature": "Temperatura",
+      "description": "Descripción",
+      "icon": "Ícono",
+      "icon_alt": "Ícono del clima",
+      "coordinates": "Coordenadas",
+      "feels_like": "Sensación térmica",
+      "humidity": "Humedad",
+      "pressure": "Presión",
+      "wind_speed": "Velocidad del viento",
+      "country_code": "Código del país",
+      "rain_volume": "Volumen de lluvia (últimas 3 horas)"
+    },
+    "motivational": {
+      "title": "Mantente saludable y bello",
+      "quote": "La salud es el mayor regalo, el contento es la mayor riqueza, la fidelidad es la mejor relación.",
+      "author": "Buda",
+      "text": "En Health&Cuidado creemos en nutrir tu cuerpo, mente y alma. Nuestros productos y servicios están diseñados para apoyar tu camino hacia el bienestar y la belleza."
+    },
+    "map": {
+      "title": "Ubicación en el mapa"
+    },
+    "product": {
+      "new_product": "Nuevo producto",
+      "create": "Crear",
+      "not_found": "No se encontraron productos.",
+      "category": "Categoría",
+      "edit_button": "Editar",
+      "delete_button": "Eliminar"
+    },
+    "modal": {
+      "edit_title": "Editar el producto",
+      "add_new_title": "Agregar un nuevo producto",
+      "product_name": "Nombre del producto",
+      "product_category": "Categoría del producto",
+      "product_description": "Descripción del producto",
+      "product_images": "URLs de las imágenes (máximo 3, separadas por comas)",
+      "close": "Cerrar",
+      "save": "Guardar"
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "username_placeholder": "Nombre de usuario",
+      "password_placeholder": "Contraseña",
+      "submit_button": "Iniciar sesión",
+      "no_account": "¿No tienes cuenta?",
+      "signup_link": "Regístrate"
+    },
+    "bmi": {
+      "title": "Resultados del IMC",
+      "results_title": "Resultados del IMC",
+      "your_bmi": "Tu IMC",
+      "classification": "Estás clasificado como",
+      "under18_message": "Como eres menor de 18 años, es importante monitorear tu crecimiento y salud.",
+      "male_message": "Como hombre, la masa muscular puede afectar tu IMC.",
+      "female_message": "Como mujer, los cambios hormonales pueden afectar tu IMC.",
+      "go_back": "Volver"
+    },
+    "bmiCalculator": {
+      "title": "Calculadora del IMC",
+      "height_label": "Altura",
+      "height_placeholder": "Ingresa tu altura en centímetros",
+      "weight_label": "Peso",
+      "weight_placeholder": "Ingresa tu peso en kilogramos",
+      "units_label": "Unidades",
+      "units_metric": "Métrico",
+      "units_imperial": "Imperial",
+      "age_label": "Edad",
+      "age_placeholder": "Ingresa tu edad (opcional)",
+      "gender_label": "Género",
+      "gender_male": "Masculino",
+      "gender_female": "Femenino",
+      "calculate_button": "Calcular IMC"
+    },
+    "makeupSearch": {
+      "title": "Búsqueda de maquillaje",
+      "label": "Ingresa el nombre del producto de maquillaje:",
+      "placeholder": "por ejemplo, labial",
+      "search_button": "Buscar",
+      "results_title": "Resultados de la búsqueda",
+      "price_label": "Precio",
+      "more_info": "Más información",
+      "no_results": "No se encontraron productos para tu búsqueda."
+    },
+    "nutrient": {
+      "title": "Búsqueda de alimentos",
+      "form_label": "Ingresa el nombre del alimento para conocer sus nutrientes:",
+      "form_placeholder": "por ejemplo, manzana",
+      "search_button": "Buscar",
+      "results_title": "Resultados de la búsqueda",
+      "no_results": "No se encontró alimento para tu búsqueda."
+    },
+    "profile": {
+      "title": "Perfil",
+      "welcome_message": "¡Bienvenido a tu perfil, %s!",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email": "Correo electrónico",
+      "gender": "Género",
+      "age": "Edad",
+      "account_created": "Cuenta creada",
+      "last_updated": "Última actualización",
+      "account_deleted": "Cuenta eliminada",
+      "edit_button": "Editar perfil",
+      "edit_profile": "Editar perfil",
+      "username": "Nombre de usuario",
+      "gender_male": "Masculino",
+      "gender_female": "Femenino",
+      "gender_other": "Otro",
+      "change_password": "Cambiar contraseña",
+      "old_password": "Contraseña antigua",
+      "new_password": "Nueva contraseña",
+      "update_profile": "Actualizar perfil",
+      "logout_button": "Cerrar sesión"
+    },
+    "signup": {
+      "title": "Regístrate",
+      "username_placeholder": "Nombre de usuario",
+      "first_name_placeholder": "Nombre",
+      "last_name_placeholder": "Apellido",
+      "email_placeholder": "Correo electrónico",
+      "gender_placeholder": "Género",
+      "age_placeholder": "Edad",
+      "password_placeholder": "Crear contraseña",
+      "confirm_password_placeholder": "Confirmar contraseña",
+      "submit_button": "Regístrate",
+      "already_have_account": "¿Ya tienes cuenta?",
+      "login_link": "Iniciar sesión"
+    },
+    "history": {
+      "title": "Historial de búsquedas",
+      "back_home": "Volver al inicio",
+      "query_label": "Consulta",
+      "date_label": "Fecha",
+      "results_label": "Resultados",
+      "calories_label": "Calorías",
+      "protein_label": "Proteínas",
+      "carbs_label": "Carbohidratos",
+      "fat_label": "Grasas",
+      "no_history": "No se encontró historial de búsquedas."
+    }
+  }
+  

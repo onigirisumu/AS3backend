@@ -42,7 +42,15 @@ router.post('/', [
 
     console.log(chalk.green(`Height: ${height}, Weight: ${weight}, BMI: ${bmi.toFixed(2)}, Category: ${category}, Age: ${age}, Gender: ${gender}`));
 
-    res.render('bmiResult', { bmi: bmi.toFixed(2), category, age, gender });
+    res.render('bmiResult', { 
+      bmi: bmi.toFixed(2), 
+      category, 
+      age, 
+      gender, 
+      page: 'bmi', 
+      user: req.user || null 
+    });
 });
+
 
 module.exports = router;

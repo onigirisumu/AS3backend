@@ -1,0 +1,179 @@
+{
+  "title": "Home - My Cosmetic Brand",
+  "brand": "Health&Care",
+  "toggle_navigation": "Toggle navigation",
+  "nav": {
+    "home": "HOME",
+    "bmi": "BMI",
+    "makeup": "MAKEUP",
+    "makeup_history": "MAKEUP HISTORY",
+    "nutrient": "NUTRIENT",
+    "history": "HISTORY",
+    "admin": "Admin",
+    "profile": "Profile",
+    "login": "Log in"
+  },
+  "carousel": {
+    "alt1": "Carousel image 1",
+    "alt2": "Carousel image 2",
+    "alt3": "Carousel image 3",
+    "slide1_title": "Discover new horizons of beauty",
+    "slide1_text": "Try our exclusive new products in cosmetics. Unique formulas for the health and radiance of your skin.",
+    "slide2_title": "Learn from the professionals",
+    "slide2_text": "Watch our tutorials on makeup and skin care. Step-by-step instructions from leading cosmetologists.",
+    "slide3_title": "Discounts and promotions on your favorite products",
+    "slide3_text": "Don't miss the chance to buy the best cosmetics at special prices. Beauty should be accessible to everyone.",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "welcome": {
+    "title": "Welcome to Health & Care Hub",
+    "subtitle": "Welcome to Health & Care Hub — your partner in promoting a healthy lifestyle and radiant skin.",
+    "description": "At Health & Care Hub, we believe that health and beauty go hand in hand. We are here to guide you on a journey towards optimal well-being, focusing on skin care that nourishes and rejuvenates from the inside out. Our mission is to offer more than just products — we provide holistic solutions designed to enhance your health, appearance, and overall wellness.",
+    "footer_text": "At Health & Care Hub, we are dedicated to empowering you with the knowledge and tools to care for your skin and overall health. We believe that everyone deserves to look and feel their best, every single day."
+  },
+  "weather": {
+    "title": "Current Weather in Astana",
+    "temperature": "Temperature",
+    "description": "Description",
+    "icon": "Icon",
+    "icon_alt": "Weather icon",
+    "coordinates": "Coordinates",
+    "feels_like": "Feels Like",
+    "humidity": "Humidity",
+    "pressure": "Pressure",
+    "wind_speed": "Wind Speed",
+    "country_code": "Country Code",
+    "rain_volume": "Rain Volume (last 3 hours)"
+  },
+  "motivational": {
+    "title": "Stay Healthy and Beautiful",
+    "quote": "Health is the greatest gift, contentment the greatest wealth, faithfulness the best relationship.",
+    "author": "Buddha",
+    "text": "At Health & Care Hub, we believe in nurturing your body, mind, and soul. Our products and services are designed to support your journey to wellness and beauty."
+  },
+  "map": {
+    "title": "Map Location"
+  },
+  "product": {
+    "new_product": "New product",
+    "create": "Create",
+    "not_found": "Products are not found.",
+    "category": "Category",
+    "edit_button": "Edit",
+    "delete_button": "Delete"
+  },
+  "modal": {
+    "edit_title": "Edit the product",
+    "add_new_title": "Add a new product",
+    "product_name": "Product Name",
+    "product_category": "Product Category",
+    "product_description": "Product Description",
+    "product_images": "URL images (maximum 3, separated by commas)",
+    "close": "Close",
+    "save": "Save"
+  },
+  "login": {
+    "title": "Login",
+    "username_placeholder": "Username",
+    "password_placeholder": "Password",
+    "submit_button": "Login",
+    "no_account": "Don't have an account?",
+    "signup_link": "Sign Up"
+  },
+  "bmi": {
+    "title": "BMI Results",
+    "results_title": "BMI Results",
+    "your_bmi": "Your BMI",
+    "classification": "You are classified as",
+    "under18_message": "As you're under 18, it's important to monitor your growth and health.",
+    "male_message": "As a male, muscle mass might affect your BMI.",
+    "female_message": "As a female, hormonal changes can affect your BMI.",
+    "go_back": "Go Back"
+  },
+  "bmiCalculator": {
+    "title": "BMI Calculator",
+    "height_label": "Height",
+    "height_placeholder": "Enter your height in centimeters",
+    "weight_label": "Weight",
+    "weight_placeholder": "Enter your weight in kilograms",
+    "units_label": "Units",
+    "units_metric": "Metric",
+    "units_imperial": "Imperial",
+    "age_label": "Age",
+    "age_placeholder": "Enter your age (optional)",
+    "gender_label": "Gender",
+    "gender_male": "Male",
+    "gender_female": "Female",
+    "calculate_button": "Calculate BMI"
+  },
+  "makeupSearch": {
+  "title": "Makeup Search",
+  "label": "Enter the makeup product name:",
+  "placeholder": "e.g., Lipstick",
+  "search_button": "Search",
+  "results_title": "Search Results",
+  "price_label": "Price",
+  "more_info": "More Info",
+  "no_results": "No products found for your search."
+},
+"nutrient": {
+  "title": "Food Search",
+  "form_label": "Enter the food name to know its nutrients!:",
+  "form_placeholder": "e.g., Apple",
+  "search_button": "Search",
+  "results_title": "Search Results",
+  "no_results": "No food found for your search."
+},
+"profile": {
+  "title": "Profile",
+  "welcome_message": "Welcome to your profile!",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "gender": "Gender",
+  "age": "Age",
+  "account_created": "Account Created",
+  "last_updated": "Last Updated",
+  "account_deleted": "Account Deleted",
+  "edit_button": "Edit Profile",
+  "edit_profile": "Edit Profile",
+  "username": "User Name",
+  "gender_male": "Male",
+  "gender_female": "Female",
+  "gender_other": "Other",
+  "change_password": "Change Password",
+  "old_password": "Old Password",
+  "new_password": "New Password",
+  "update_profile": "Update Profile",
+  "logout_button": "Log out"
+},
+"signup": {
+  "title": "Sign Up",
+  "username_placeholder": "User name",
+  "first_name_placeholder": "First Name",
+  "last_name_placeholder": "Last Name",
+  "email_placeholder": "Email",
+  "gender_placeholder": "Gender",
+  "age_placeholder": "Age",
+  "password_placeholder": "Create Password",
+  "confirm_password_placeholder": "Confirm Password",
+  "submit_button": "Sign Up",
+  "already_have_account": "Already have an account?",
+  "login_link": "Login"
+},
+"history": {
+  "title": "Search History",
+  "back_home": "Back to Home",
+  "query_label": "Query",
+  "date_label": "Date",
+  "results_label": "Results",
+  "calories_label": "Calories",
+  "protein_label": "Protein",
+  "carbs_label": "Carbohydrates",
+  "fat_label": "Fat",
+  "no_history": "No search history found."
+}
+
+
+}

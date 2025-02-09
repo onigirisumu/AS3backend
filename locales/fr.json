@@ -1,0 +1,177 @@
+{
+  "title": "Accueil - Ma Marque Cosmétique",
+  "brand": "Santé & Soin",
+  "toggle_navigation": "Basculer la navigation",
+  "nav": {
+    "home": "ACCUEIL",
+    "bmi": "IMC",
+    "makeup": "Maquillage",
+    "makeup_history": "Historique du maquillage",
+    "nutrient": "Nutriment",
+    "history": "Historique",
+    "admin": "Admin",
+    "profile": "Profil",
+    "login": "Connexion"
+  },
+  "carousel": {
+    "alt1": "Image du carrousel 1",
+    "alt2": "Image du carrousel 2",
+    "alt3": "Image du carrousel 3",
+    "slide1_title": "Découvrez de nouveaux horizons de beauté",
+    "slide1_text": "Essayez nos nouveaux produits exclusifs en cosmétique. Des formules uniques pour la santé et l'éclat de votre peau.",
+    "slide2_title": "Apprenez des professionnels",
+    "slide2_text": "Regardez nos tutoriels sur le maquillage et les soins de la peau. Des instructions étape par étape par des cosméto­logistes renommés.",
+    "slide3_title": "Promotions et remises sur vos produits préférés",
+    "slide3_text": "Ne manquez pas l'occasion d'acheter les meilleurs cosmétiques à des prix spéciaux. La beauté doit être accessible à tous.",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "welcome": {
+    "title": "Bienvenue sur Health & Care Hub",
+    "subtitle": "Bienvenue sur Health & Care Hub — votre partenaire pour promouvoir un mode de vie sain et une peau éclatante.",
+    "description": "Chez Health & Care Hub, nous croyons que la santé et la beauté vont de pair. Nous sommes là pour vous guider sur la voie du bien-être optimal, en nous concentrant sur des soins de la peau qui nourrissent et rajeunissent de l'intérieur. Notre mission est d'offrir plus que de simples produits — nous fournissons des solutions holistiques conçues pour améliorer votre santé, votre apparence et votre bien-être global.",
+    "footer_text": "Chez Health & Care Hub, nous nous engageons à vous donner les moyens de prendre soin de votre peau et de votre santé globale. Nous croyons que chacun mérite de se sentir et d'être au mieux de sa forme, chaque jour."
+  },
+  "weather": {
+    "title": "Météo actuelle à Astana",
+    "temperature": "Température",
+    "description": "Description",
+    "icon": "Icône",
+    "icon_alt": "Icône météo",
+    "coordinates": "Coordonnées",
+    "feels_like": "Ressenti",
+    "humidity": "Humidité",
+    "pressure": "Pression",
+    "wind_speed": "Vitesse du vent",
+    "country_code": "Code pays",
+    "rain_volume": "Volume de pluie (3 dernières heures)"
+  },
+  "motivational": {
+    "title": "Restez en bonne santé et belle",
+    "quote": "La santé est le plus beau cadeau, le contentement est la plus grande richesse, la fidélité est la meilleure relation.",
+    "author": "Bouddha",
+    "text": "Chez Health & Care Hub, nous croyons en l'importance de nourrir votre corps, votre esprit et votre âme. Nos produits et services sont conçus pour soutenir votre chemin vers le bien-être et la beauté."
+  },
+  "map": {
+    "title": "Emplacement sur la carte"
+  },
+  "product": {
+    "new_product": "Nouveau produit",
+    "create": "Créer",
+    "not_found": "Aucun produit trouvé.",
+    "category": "Catégorie",
+    "edit_button": "Modifier",
+    "delete_button": "Supprimer"
+  },
+  "modal": {
+    "edit_title": "Modifier le produit",
+    "add_new_title": "Ajouter un nouveau produit",
+    "product_name": "Nom du produit",
+    "product_category": "Catégorie du produit",
+    "product_description": "Description du produit",
+    "product_images": "URL des images (maximum 3, séparées par des virgules)",
+    "close": "Fermer",
+    "save": "Enregistrer"
+  },
+  "login": {
+    "title": "Connexion",
+    "username_placeholder": "Nom d'utilisateur",
+    "password_placeholder": "Mot de passe",
+    "submit_button": "Connexion",
+    "no_account": "Vous n'avez pas de compte ?",
+    "signup_link": "S'inscrire"
+  },
+  "bmi": {
+    "title": "Résultats de l'IMC",
+    "results_title": "Résultats de l'IMC",
+    "your_bmi": "Votre IMC",
+    "classification": "Vous êtes classé(e) comme",
+    "under18_message": "Comme vous avez moins de 18 ans, il est important de surveiller votre croissance et votre santé.",
+    "male_message": "En tant qu'homme, la masse musculaire peut influencer votre IMC.",
+    "female_message": "En tant que femme, les changements hormonaux peuvent influencer votre IMC.",
+    "go_back": "Retour"
+  },
+  "bmiCalculator": {
+    "title": "Calcul de l'IMC",
+    "height_label": "Taille",
+    "height_placeholder": "Entrez votre taille en centimètres",
+    "weight_label": "Poids",
+    "weight_placeholder": "Entrez votre poids en kilogrammes",
+    "units_label": "Unités",
+    "units_metric": "Métrique",
+    "units_imperial": "Impérial",
+    "age_label": "Âge",
+    "age_placeholder": "Entrez votre âge (facultatif)",
+    "gender_label": "Sexe",
+    "gender_male": "Homme",
+    "gender_female": "Femme",
+    "calculate_button": "Calculer l'IMC"
+  },
+  "makeupSearch": {
+  "title": "Recherche de maquillage",
+  "label": "Entrez le nom du produit de maquillage :",
+  "placeholder": "ex : Rouge à lèvres",
+  "search_button": "Rechercher",
+  "results_title": "Résultats de la recherche",
+  "price_label": "Prix",
+  "more_info": "Plus d'informations",
+  "no_results": "Aucun produit trouvé pour votre recherche."
+},
+"nutrient": {
+  "title": "Recherche Alimentaire",
+  "form_label": "Entrez le nom de l'aliment pour connaître ses nutriments :",
+  "form_placeholder": "ex : Pomme",
+  "search_button": "Rechercher",
+  "results_title": "Résultats de la recherche",
+  "no_results": "Aucun aliment trouvé pour votre recherche."
+},
+"profile": {
+  "title": "Profil",
+  "welcome_message": "Bienvenue sur votre profil!",
+  "first_name": "Prénom",
+  "last_name": "Nom de famille",
+  "email": "Email",
+  "gender": "Sexe",
+  "age": "Âge",
+  "account_created": "Compte créé",
+  "last_updated": "Dernière mise à jour",
+  "account_deleted": "Compte supprimé",
+  "edit_button": "Modifier le profil",
+  "edit_profile": "Modifier le profil",
+  "username": "Nom d'utilisateur",
+  "gender_male": "Homme",
+  "gender_female": "Femme",
+  "gender_other": "Autre",
+  "change_password": "Changer le mot de passe",
+  "old_password": "Ancien mot de passe",
+  "new_password": "Nouveau mot de passe",
+  "update_profile": "Mettre à jour le profil",
+  "logout_button": "Se déconnecter"
+},
+"signup": {
+  "title": "Inscription",
+  "username_placeholder": "Nom d'utilisateur",
+  "first_name_placeholder": "Prénom",
+  "last_name_placeholder": "Nom de famille",
+  "email_placeholder": "Email",
+  "gender_placeholder": "Sexe",
+  "age_placeholder": "Âge",
+  "password_placeholder": "Créer un mot de passe",
+  "confirm_password_placeholder": "Confirmer le mot de passe",
+  "submit_button": "S'inscrire",
+  "already_have_account": "Vous avez déjà un compte ?",
+  "login_link": "Connexion"
+},
+"history": {
+  "title": "Historique des recherches",
+  "back_home": "Retour à l'accueil",
+  "query_label": "Requête",
+  "date_label": "Date",
+  "results_label": "Résultats",
+  "calories_label": "Calories",
+  "protein_label": "Protéines",
+  "carbs_label": "Glucides",
+  "fat_label": "Lipides",
+  "no_history": "Aucun historique de recherche trouvé."
+}
+}
