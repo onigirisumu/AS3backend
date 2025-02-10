@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const bmiRoutes = require('./routes/bmiRoutes');
 const makeupRoutes = require('./routes/makeupRoutes');
+const bonusRoutes = require('./routes/bonusRoutes');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const chalk = require('chalk');
@@ -46,6 +47,7 @@ app.get('/lang/:locale', (req, res) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({ secret: 'yourSecretKey', resave: false, saveUninitialized: false }));
+app.use('/bonus', bonusRoutes);
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri)
