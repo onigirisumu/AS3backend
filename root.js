@@ -806,6 +806,9 @@ app.get('/api/food/search', async (req, res) => {
   }
 });
 
+app.get('/bonus', (req, res) => {
+  res.render('bonus');
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
