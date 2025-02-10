@@ -19,6 +19,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item <%= page === 'home' ? 'active' : '' %>"><a class="nav-link" href="/">HOME</a></li>
                     <li class="nav-item <%= page === 'bmi' ? 'active' : '' %>"><a class="nav-link" href="/bmiCalculator">BMI</a></li>
+                    <li class="nav-item <%= page === 'bonus' ? 'active' : '' %>"><a class="nav-link" href="/bonus"><%= __('nav.bonus') %></a></li>
                     <% if (user && user.isAdmin) { %>
                         <li class="nav-item <%= page === 'makeup' ? 'active' : '' %>"><a class="nav-link" href="/makeup">MAKEUP</a></li>
                         <li class="nav-item <%= page === 'makeupHistory' ? 'active' : '' %>"><a class="nav-link" href="/makeupHistory">MAKEUP HISTORY</a></li>
