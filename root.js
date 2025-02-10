@@ -10,29 +10,30 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
+const cookieParser = require('cookie-parser');
 
-require('dotenv').config();
+dotenv.config();
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
 const port = 3000;
-const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+const MakeupHistory = require('./MakeupHistory');
 
 
 const i18n = require('i18n');
 
 i18n.configure({
-    locales: ['en', 'fr', 'ru', 'es'],
-    directory: path.join(__dirname, 'locales'),
-    defaultLocale: 'en',
-    queryParameter: 'lang',
-    cookie: 'lang',
-    autoReload: true,
-    updateFiles: false,
-    objectNotation: true
-  });
+  locales: ['en', 'fr', 'ru', 'es'],
+  directory: path.join(__dirname, 'locales'),
+  defaultLocale: 'en',
+  queryParameter: 'lang',
+  cookie: 'lang',
+  autoReload: true,
+  updateFiles: false,
+  objectNotation: true
+});
   
-
 app.use(i18n.init);
 
 app.get('/lang/:locale', (req, res) => {
@@ -47,7 +48,6 @@ app.use(bodyParser.json());
 app.use(session({ secret: 'yourSecretKey', resave: false, saveUninitialized: false }));
 
 const uri = process.env.MONGODB_URI;
-
 mongoose.connect(uri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
@@ -102,6 +102,47 @@ const makeupDataSchema = new mongoose.Schema({
 });
 
 const MakeupData = mongoose.model('MakeupData', makeupDataSchema);
+
+
+const History = require('./public/js/history');
+
+const { TranslationServiceClient } = require('@google-cloud/translate').v3;
+const translationClient = new TranslationServiceClient();
+
+/**
+ * @param {string} text 
+ * @param {string} targetLanguage 
+ * @returns {Promise<string>} 
+ */
+
+async function translateText(text, targetLanguage) {
+  const apiKey = 'AIzaSyB7OKfzniEz1CSA_K_Ir0Ou811yISLlJAE'; 
+  try {
+    const response = await axios.post(
+      `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
+      {
+        q: text,
+        source: 'en',
+        target: targetLanguage,
+        format: 'text'
+      }
+    );
+    
+    if (
+      response.data &&
+      response.data.data &&
+      response.data.data.translations &&
+      response.data.data.translations.length > 0
+    ) {
+      return response.data.data.translations[0].translatedText;
+    }
+    return text;
+  } catch (error) {
+    console.error('Translation error:', error.message);
+    return text; 
+  }
+}
+
 
 async function createAdmin() {
   const adminUsernames = process.env.ADMIN_USERS.split(',');
@@ -306,13 +347,14 @@ app.post('/admin/add-user', isAdmin, async (req, res) => {
     }
   }
 });
+
 app.get('/', async (req, res) => {
-    console.log('Current locale:', res.getLocale());
-    const user = req.user || null;
-    const products = await Product.find();
-    res.render('home', { user, products, page: 'home' });
-  });
-  
+  console.log('Current locale:', res.getLocale());
+  const user = req.user || null;
+  const products = await Product.find();
+  res.render('home', { user, products, page: 'home' });
+});
+
 app.post('/admin/edit-user/:id', isAdmin, async (req, res) => {
   const userId = req.params.id;
   const { firstName, lastName, username, email, gender, age, password, isAdmin } = req.body;
@@ -358,7 +400,7 @@ app.post('/admin/delete-user/:id', isAdmin, async (req, res) => {
   }
 });
 
-// Routes
+// Set view engine and static assets
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -458,26 +500,23 @@ app.post('/makeup/saveHistory', async (req, res) => {
   try {
     const { query, results } = req.body;
 
-    if (!results || results.length === 0) {
+    if (!results || !Array.isArray(results) || results.length === 0) {
       return res.status(400).json({ error: 'No results to save' });
     }
 
-    const savePromises = results.map(async (product) => {
-      return new MakeupData({
-        userId: req.session.userId,
-        searchQuery: query,
-        makeupId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image_link,
-        description: product.description || "No description available.",
-        productType: product.product_type,
-        productLink: product.product_link,
-        timestamp: new Date()
-      }).save();
+    const transformedResults = results.map(product => ({
+      product_name: product.name,     
+      image_url: product.image_link,   
+    }));
+
+    const historyEntry = new MakeupHistory({
+      userId: req.session.userId,
+      query: query, 
+      results: transformedResults
     });
 
-    await Promise.all(savePromises);
+    await historyEntry.save();
+    console.log('Makeup search history saved successfully.');
     res.status(201).json({ message: 'Search history saved successfully' });
   } catch (error) {
     console.error('Error saving makeup search history:', error);
@@ -485,13 +524,15 @@ app.post('/makeup/saveHistory', async (req, res) => {
   }
 });
 
+
+
 app.get('/makeupHistory', async (req, res) => {
   if (!req.session.userId) {
     return res.redirect('/login');
   }
 
   try {
-    const history = await MakeupData.find({ userId: req.session.userId }).sort({ timestamp: -1 });
+    const history = await MakeupHistory.find({ userId: req.session.userId }).sort({ createdAt: -1 });
     console.log('Makeup History:', history);
     res.render('makeupHistory', {
       history,
@@ -509,7 +550,6 @@ app.get('/signup', (req, res) => {
   res.render('signup', { user, page: 'signup' });
 });
 
-// Sign Up Route
 app.post('/signup', async (req, res) => {
   const { firstName, lastName, username, email, gender, age, password, confirmPassword } = req.body;
 
@@ -537,7 +577,6 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// Login Route (duplicate of earlier login route - consider removing duplicate)
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -614,8 +653,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 
 app.get('/bmiCalculator', async (req, res) => {
@@ -644,6 +681,7 @@ app.get('/history', async (req, res) => {
 
 app.use('/bmicalculator', bmiRoutes);
 
+// Duplicate login view route (if needed, consider consolidating)
 app.get('/login', (req, res) => {
   res.render('login');
 });
@@ -698,12 +736,9 @@ app.get('/api/locations', (req, res) => {
   res.json(locations);
 });
 
-// Map route
 app.get('/map', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
-
-const History = require('./public/js/history');
 
 app.get('/api/food/search', async (req, res) => {
   const { query } = req.query;
@@ -711,42 +746,64 @@ app.get('/api/food/search', async (req, res) => {
     return res.status(400).json({ error: 'Query parameter is required' });
   }
 
-  console.log(chalk.blue(`Search query: ${query}`));
+  const targetLanguage = req.getLocale();
+  console.log(chalk.blue(`Original query: ${query} | User language: ${targetLanguage}`));
+
+  let searchQuery = query;
+  if (targetLanguage !== 'en') {
+    searchQuery = await translateText(query, 'en');
+    console.log(chalk.blue(`Translated query to English: ${searchQuery}`));
+  }
 
   try {
     const apiResponse = await axios.get('https://api.nal.usda.gov/fdc/v1/foods/search', {
       params: {
         api_key: process.env.FOODDATA_API_KEY,
-        query: query,
+        query: searchQuery,
         pageSize: 10,
       }
     });
 
-    const foodResults = apiResponse.data.foods.map(food => ({
-      description: food.description,
-      nutrients: food.foodNutrients.map(nutrient => ({
-        name: nutrient.nutrientName,
-        value: nutrient.value,
-        unit: nutrient.unitName
-      })),
-      brand: food.brandOwner || 'N/A',
+    if (!apiResponse.data || !apiResponse.data.foods) {
+      return res.status(404).json({ error: 'No foods found in API response' });
+    }
+
+    let foodResults = apiResponse.data.foods.map(food => ({
+      description: food.description || "",
+      nutrients: (food.foodNutrients && Array.isArray(food.foodNutrients))
+        ? food.foodNutrients.map(nutrient => ({
+            name: nutrient.nutrientName || "",
+            value: nutrient.value,
+            unit: nutrient.unitName || ""
+          }))
+        : [],
+      brand: food.brandOwner || 'N/A'
     }));
 
+    if (targetLanguage !== 'en') {
+      foodResults = await Promise.all(foodResults.map(async food => {
+        const translatedDescription = food.description
+          ? await translateText(food.description, targetLanguage)
+          : "";
+        return { ...food, description: translatedDescription };
+      }));
+    }
+
     const historyEntry = new History({
-      userId: req.session.userId || null, 
-      query: query,
+      userId: req.session.userId || null,
+      query: query, 
       results: foodResults
     });
-
-    await historyEntry.save(); 
+    await historyEntry.save();
     console.log(chalk.green('History entry saved.'));
 
-    res.json(foodResults); 
+    res.json(foodResults);
   } catch (error) {
     console.error(chalk.red('Error fetching food data:'), error.message);
     res.status(500).json({ error: 'Failed to fetch food data' });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

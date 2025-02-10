@@ -5,26 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <link rel="stylesheet" href="/css/bmiCalculator.css">
+  <link rel="stylesheet" href="/css/bmi.css">
   <title><%= __('bmiCalculator.title') %></title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    .page-wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    .flex-grow-1 {
-      flex: 1;
-    }
-  </style>
 </head>
 <body>
   <div class="page-wrapper">
-    <!-- Header with Navbar -->
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
@@ -84,18 +69,7 @@
       </nav>
     </header>
 
-    <div class="container mt-5 pt-5">
-      <div class="row">
-        <div class="col text-right">
-          <a href="/lang/en" class="btn btn-sm btn-outline-primary">English</a>
-          <a href="/lang/fr" class="btn btn-sm btn-outline-primary">Français</a>
-          <a href="/lang/ru" class="btn btn-sm btn-outline-primary">Русский</a>
-          <a href="/lang/es" class="btn btn-sm btn-outline-primary">Espanol</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Main Content -->
     <main class="container flex-grow-1" style="margin-top: 120px;">
       <h1 class="mt-5 text-center"><%= __('bmiCalculator.title') %></h1>
       <form action="/bmiCalculator" method="POST" class="mt-4">

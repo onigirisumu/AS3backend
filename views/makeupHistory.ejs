@@ -43,25 +43,27 @@
         <ul class="list-unstyled">
             <% history.forEach(entry => { %>
                 <li class="mb-4">
-                    <strong>Search Date:</strong> <%= entry.createdAt %> <br>
-                    <strong>Results:</strong>
-                    <ul class="search-results">
-                        <% if (entry.results && entry.results.length > 0) { %>
-                            <% entry.results.forEach(result => { %>
-                                <li class="result-item mb-2">
-                                    <strong><%= result.product_name %></strong> <br>
-                                    <img src="<%= result.image_url %>" alt="<%= result.product_name %>" width="100" height="100"> <br>
-                                </li>
-                            <% }) %>
-                        <% } else { %>
-                            <li>No results found.</li>
-                        <% } %>
-                    </ul>
+                  <strong>Search Date:</strong> <%= entry.createdAt %> <br>
+                  <strong>Results:</strong>
+                  <ul class="search-results">
+                    <% if (entry.results && entry.results.length > 0) { %>
+                      <% entry.results.forEach(result => { %>
+                        <li class="result-item mb-2">
+                          <strong><%= result.product_name %></strong> <br>
+                          <img src="<%= result.image_url %>" alt="<%= result.product_name %>" width="100" height="100"> <br>
+                        </li>
+                      <% }) %>
+                    <% } else { %>
+                      <li>No results found.</li>
+                    <% } %>
+                  </ul>
                 </li>
-            <% }) %>
+              <% }) %>              
         </ul>
     </main>
-
+    <footer>
+        <p>&copy; Ali Ainur, Akerke Kassymbekova, Darina Abdukadirova, IT-2308</p>
+      </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>
