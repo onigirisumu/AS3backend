@@ -47,7 +47,7 @@ nav {
 
 .navbar-brand a {
     text-decoration: none;
-    color: #ff69b4;
+    color: #ff69b4; /* Cute pink color */
     font-size: 2rem;
     font-weight: bold;
 }
@@ -60,12 +60,12 @@ nav {
 }
 
 .navbar-nav .nav-item.active .nav-link {
-    color: #ff69b4;
+    color: #ff69b4; /* Pink color for active nav link */
     font-weight: bold;
 }
 
 .hero {
-    background-color: #fff0f6;
+    background-color: #fff0f6; /* Cute pink background */
     color: #ffffff;
     padding: 80px 0;
 }
@@ -76,6 +76,7 @@ nav {
     font-weight: 700;
 }
 
+/* Timer Section */
 #timer-container {
     margin-bottom: 30px;
 }
@@ -83,27 +84,28 @@ nav {
 #timer {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #e74c3c;
+    color: #e74c3c; /* Red accent */
 }
 
+/* Quiz Section */
 #quiz-container {
-    background-color: #fff0f6;
+    background-color: #fff0f6; /* Light pink background */
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    margin: 40px auto;
+    margin: 40px auto; /* Center quiz container */
 }
 
 #quiz-question {
-    margin-bottom: 25px;
+    margin-bottom: 25px; /* Space between question and options */
 }
 
 #quiz-question p {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #ff69b4;
-    text-align: center;
+    color: #ff69b4; /* Cute pink question text */
+    text-align: center; /* Center the question */
 }
 
 #quiz-options {
@@ -111,47 +113,49 @@ nav {
     flex-direction: column;
     gap: 20px;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Center the options */
 }
 
 button {
     font-weight: 500;
-    background-color: #ffb6c1;
+    background-color: #ffb6c1; /* Soft pink button */
     color: #fff;
     padding: 12px 20px;
     border-radius: 12px;
     font-size: 1.1rem;
-    width: 80%;
+    width: 80%; /* Make the button width consistent */
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #ff69b4;
+    background-color: #ff69b4; /* Darker pink on hover */
 }
 
 #next-question, #submit-quiz {
     margin-top: 20px;
-    background-color: #ff69b4;
+    background-color: #ff69b4; /* Cute pink button */
     color: white;
     border-radius: 12px;
     padding: 12px 20px;
     font-size: 1.2rem;
-    width: 80%;
+    width: 80%; /* Consistent width with options */
     transition: background-color 0.3s ease;
 }
 
 #next-question:hover, #submit-quiz:hover {
-    background-color: #ff80b2;
+    background-color: #ff80b2; /* Lighter pink hover effect */
 }
 
+/* Time-Up Feedback */
 #time-up-feedback {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #ff69b4;
+    color: #ff69b4; /* Cute pink feedback */
     margin-top: 20px;
-    text-align: center;
+    text-align: center; /* Center time-up message */
 }
 
+/* Social Sharing Section */
 #social-sharing {
     margin-top: 30px;
 }
@@ -159,20 +163,20 @@ button:hover {
 #social-sharing h3 {
     font-size: 1.3rem;
     margin-bottom: 15px;
-    color: #ff69b4;
-    text-align: center;
+    color: #ff69b4; /* Cute pink for social sharing */
+    text-align: center; /* Center social sharing text */
 }
 
 #social-sharing .btn-group button {
     font-weight: 600;
-    background-color: #ff69b4;
+    background-color: #ff69b4; /* Pink buttons */
     color: white;
     border-radius: 10px;
     padding: 10px 15px;
 }
 
 #social-sharing .btn-group button:hover {
-    background-color: #ffb6c1;
+    background-color: #ffb6c1; /* Lighter pink hover */
 }
 
 footer {
@@ -180,7 +184,7 @@ footer {
     color: #ffffff;
     padding: 20px;
     text-align: center;
-    border-top: 3px solid #ff69b4;
+    border-top: 3px solid #ff69b4; /* Pink border top */
     box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
 }
 
@@ -196,7 +200,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #ffebee;
+    color: #ffebee; /* Light pink hover effect */
 }
 
 @media (max-width: 768px) {
@@ -211,7 +215,7 @@ footer a:hover {
 
     #quiz-container {
         padding: 20px;
-        width: 90%;
+        width: 90%; /* Make quiz container more responsive */
     }
 
     #quiz-question p {
@@ -223,6 +227,6 @@ footer a:hover {
     }
 
     button, #next-question, #submit-quiz {
-        width: 90%;
+        width: 90%; /* Make buttons more responsive */
     }
 }
